@@ -2,10 +2,17 @@ const express = require('express');
 const morgan = require("morgan");
 const layout = require("./views/layout");
 const main = require ("./views/main");
+const wikiRouter = require('./routes/wiki');
+const userRouter = require('./routes/user');
+const pg = require('pg');
+//f
 let app = express()
-let pg = require('pg')
 
-const { db, Page, User } = require('./models')
+
+const { db, Page, User } = require('./models');
+
+app.use('/wiki', wikiRouter);
+app.use('/user', userRouter);
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({extended : false}));
